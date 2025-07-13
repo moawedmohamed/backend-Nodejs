@@ -1,4 +1,4 @@
-import { Product } from "../types/product";
+import { Product, ProductBody } from "../types/product";
 
 
 class ProductsService {
@@ -9,13 +9,12 @@ class ProductsService {
     findAll(): Product[] {
         return this.products
     }
-    filterFelids() {
-        const filterQuery = req.query.filter as string;
+    filterFelids(filterQuery?: string) {
         console.log(filterQuery);
         if (filterQuery) {
             const propertiesToFilter = filterQuery.split(",");
             let filteredProducts = [];
-            filteredProducts = fakeProducts.map((product) => {
+            filteredProducts = this.findAll().map((product) => {
                 const filteredProduct: any = {};
                 propertiesToFilter.forEach((property) => {
                     if (product.hasOwnProperty(property)) {
@@ -24,12 +23,24 @@ class ProductsService {
                 });
                 return { id: product.id, ...filteredProduct };
             });
-            res.send(filteredProducts);
-            return;
+            return filteredProducts;
         }
-        res.send(fakeProducts);
-        return;
+        return this.findAll();
 
     }
+    getProductByID(id?: number) {
+        return this.findAll().find(product => product.id === id);
+    }
+    createProduct(productBody: ProductBody) {
+        return this.findAll().push({ id: this.findAll().length + 1, ...productBody });
+
+    }
+    updateProductByIndex(index: number, productBody: ProductBody) {
+        return this.findAll()[index] = { ...this.findAll()[index], ...productBody }
+    }
 }
-export de
+export default ProductsService;
+
+
+
+//** filter by */

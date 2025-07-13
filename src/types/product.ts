@@ -12,3 +12,8 @@ export interface Product {
     price: number,
     description:string
 }
+export interface ProductBody{
+    title: string,
+    price: number,
+    description:string
+}

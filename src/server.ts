@@ -5,10 +5,11 @@ import { Product } from "./types/product";
 import ProductController from "./controllers/productController";
 import ProductsService from "./services/productsService";
 const app = express();
+app.set('view engine', 'pug')
+app.get('/', (req, res) => {
+    res.render('index',)
+})
 
-app.get("/", (req, res) => {
-    res.send("<h1>hello express.js</h1>");
-});
 
 // ** if you want to make the custom header use this method
 // app.use(express.json({
@@ -24,73 +25,17 @@ const productController = new ProductController(productsService)
 console.log(productController)
 
 
-app.get("/products", (req: Request, res: Response) =>{ res.status(200).send(productController.getProduct())});
-app.get("/products/:id", (req, res) => {
-    const id = parseInt(req.params.id);
-    if (isNaN(id)) {
-        res.status(404).json({ message: "You id Must be a number!" });
-        return;
-    }
-    const product: Product | undefined = fakeProducts.find((p) => p.id === id);
-    if (product) {
-        res.json({
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            description: product.description,
-        });
-    } else {
-        res.status(404).json({ message: "Product Not Found!" });
-    }
-});
+app.get("/products", (req, res) => productController.getProduct(req, res));
+
+app.get("/products/:id", (req, res) => productController.getProductByID(req, res));
 // ** Post Method
-app.post("/products", (req, res) => {
-    // console.log(req.body)
-    const newProduct = req.body;
-    fakeProducts.push({ id: fakeProducts.length + 1, ...newProduct });
-    res.status(201).send({
-        id: fakeProducts.length + 1,
-        title: newProduct.title,
-        price: newProduct.price,
-        description: newProduct.description,
-    });
-});
+app.post("/products", (req, res) => productController.createProduct(req, res));
 
 // ** Patch Method
-app.patch("/products/:id", (req, res) => {
-    const productId = +req.params.id;
-    if (isNaN(productId)) {
-        res.status(404).send({ message: "the product must be number!" });
-        return;
-    }
-    const productIndex: number | undefined = fakeProducts.findIndex(product => product.id === productId);
-    const productBody = req.body;
-    if (productIndex !== -1) {
-        fakeProducts[productIndex] = { ...fakeProducts[productIndex], ...productBody }
-        res.status(200).send({ message: "the product has been updated " });
-        return;
-    } else {
-        res.status(404).send({ message: "the product not found!" });
-        return;
-    }
-});
+app.patch("/products/:id", (req, res) => productController.updateProduct(req, res));
 
 // ** Delete Method
-app.delete('/products/:id', (req, res) => {
-    const productId = + req.params.id;
-    if (isNaN(productId)) {
-        res.status(404).send("the productID must be number!");
-        return;
-    }
-    const productIndex: number | undefined = fakeProducts.findIndex(product => product.id === productId)
-    if (productIndex !== -1) {
-        const filteredProduct = fakeProducts.filter(product => product.id !== productId)
-        res.status(200).send(filteredProduct);
-    } else {
-        res.status(404).send({ message: "product not found!" });
-
-    }
-})
+app.delete('/products/:id', (req, res) => productController.deleteProduct(req, res))
 const PORT: number = 5000;
 app.listen(PORT, () => {
     console.log(` the server running on http://localhost:${PORT}`);
