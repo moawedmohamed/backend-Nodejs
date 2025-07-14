@@ -11,9 +11,6 @@ console.log('hello');
 // ** set views and engine 
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
-app.get('/', (req, res) => {
-    res.render('index',)
-})
 
 // * static fils 
 app.use(express.static(path.join(__dirname, "public")))
@@ -30,19 +27,32 @@ const fakeProducts = generateFakeData();
 const productsService = new ProductsService(fakeProducts);
 const productController = new ProductController(productsService)
 console.log(productController)
+app.get('/', (req, res) => {
+    res.render('index')
+})
+app.get('/products', (req, res) => {
+    res.render('products')
+})
+app.get("/api/products", (req, res) => productController.getProduct(req, res));
 
-
-app.get("/products", (req, res) => productController.getProduct(req, res));
-
-app.get("/products/:id", (req, res) => productController.getProductByID(req, res));
+app.get("/api/products/:id", (req, res) => productController.getProductByID(req, res));
 // ** Post Method
-app.post("/products", (req, res) => productController.createProduct(req, res));
+app.post("/api/products", (req, res) => productController.createProduct(req, res));
 
 // ** Patch Method
-app.patch("/products/:id", (req, res) => productController.updateProduct(req, res));
+app.patch("/api/products/:id", (req, res) => productController.updateProduct(req, res));
 
 // ** Delete Method
-app.delete('/products/:id', (req, res) => productController.deleteProduct(req, res))
+app.delete('/api/products/:id', (req, res) => productController.deleteProduct(req, res))
+try {
+
+    app.use((req, res) => {
+        res.status(404).render('notFound');
+    });
+} catch (error) {
+    console.log('the error is ' + error);
+
+}
 const PORT: number = 5000;
 app.listen(PORT, () => {
     console.log(` the server running on http://localhost:${PORT}`);
