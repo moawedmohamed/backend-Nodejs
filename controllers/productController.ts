@@ -75,5 +75,11 @@ class ProductController {
 
         }
     }
+    renderProductList(req: Request, res: Response) {
+        res.render('products', {
+            pageTitle: "View Products",
+            products: this.productService.findAll(),
+        })
+    }
 }
 export default ProductController
