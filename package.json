@@ -2,7 +2,7 @@
   "type": "commonjs",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
+    "dev": "nodemon --watch ./ --ext ts --exec ts-node ./server.ts",
     "de": "tsc && node ./dist/index.js",
     "build": "tsc -p ."
   },
@@ -16,6 +16,7 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "pug": "^3.0.3"
   }
 }
