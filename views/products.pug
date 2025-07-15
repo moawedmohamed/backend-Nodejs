@@ -3,8 +3,18 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Products Page 
-    body 
-        .container 
-            h1= pageTitle
-            div= JSON.stringify(products)
+        link(rel="stylesheet", href="/styles/global.css")
+
+title Products Page 
+body 
+    h1.title= pageTitle
+
+    ul.product-grid
+        each product in products
+                .item-container
+                    a(href=`/products/${product.id}`) 
+                        h2.item-heading= product.title 
+                    p.item-description= product.description
+                    p.item-price
+                        sup= product.price
+                    button.item-cart-btn Add To Cart

@@ -1,13 +1,76 @@
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
+/* Title Styling */
+body{
+    /* background-color: purple    ; */
+
+}
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 2rem auto;
+    color: purple;
+    border-bottom: 2px solid purple;
+    width: fit-content;
+    padding-bottom: 0.5rem;
 }
 
-.page-title {
-    background-color: purple;
-    color: white;
-    text-align: center;
-    width: fit-content;
+/* Grid Styling */
+.product-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
     margin: 0 auto;
+    max-width: 1200px;
+}
 
+/* Product Card */
+.item-container {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+}
+
+.item-heading {
+    text-transform: capitalize;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.item-description {
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.item-price {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.item-price sup {
+    color: green;
+}
+
+/* Button */
+.item-cart-btn {
+    background-color: rgb(200, 142, 254);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.item-cart-btn:hover {
+    background-color: rgb(160, 110, 206);
 }

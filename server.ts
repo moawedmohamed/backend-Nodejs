@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 app.get('/products', (req, res) => productController.renderProductList(req, res))
+app.get('/products/:id', (req, res) => productController.renderProductPage(req, res))
 app.get("/api/products", (req, res) => productController.getProduct(req, res));
 
 app.get("/api/products/:id", (req, res) => productController.getProductByID(req, res));
