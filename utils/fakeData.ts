@@ -7,7 +7,8 @@ export const generateFakeData = (): Product[] => {
             id: idx + 1,
             title: faker.commerce.productName(),
             price: +faker.commerce.price({ min: 100, max: 1000 }),
-            description: faker.commerce.productDescription()
+            description: faker.commerce.productDescription(),
+            imageUrl: faker.image.urlPicsumPhotos()
         }
     })
 }

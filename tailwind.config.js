@@ -3,6 +3,9 @@ module.exports = {
   content: ["./views/*.{pug,ejs,html}", "./public/**/*.{js,ts,css}"],
 
   theme: {
+    container: {
+      center: true,
+    },
     extend: {},
   },
   plugins: [],

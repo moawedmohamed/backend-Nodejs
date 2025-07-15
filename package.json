@@ -5,7 +5,7 @@
     "dev": "nodemon --watch ./ --ext ts --exec ts-node ./server.ts",
     "de": "tsc && node ./dist/index.js",
     "build": "tsc -p .",
-    "build:css": "postcss public/styles/tailwind.css -o public/styles/global.css"
+    "build:css": "postcss public/styles/tailwind.css -o public/styles/global.css --watch"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",

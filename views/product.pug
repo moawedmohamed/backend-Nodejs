@@ -1,11 +1,34 @@
 doctype html
 html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="/styles/global.css")
-        title= `Product - ${product.id}` 
-    body 
-        h1.bg-purple-500= product.title 
-        h3= product.price 
-        p= product.description 
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href=" /styles/global.css")
+    title= `Product - ${product.title}`
+
+  body(class="bg-gray-100")
+    main(class="min-h-screen flex items-center justify-center p-4 md:p-8")
+      article(class="max-w-5xl w-full bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row")
+        // Product Image
+        .image-container(class="w-full md:w-1/2")
+          img(src=product.imageUrl || '/images/placeholder.jpg', alt=product.title, class="w-full h-64 object-cover")
+
+        // Product Info
+        .info-container(class="flex-1 p-6 flex flex-col justify-between")
+          h1(class="text-4xl font-bold text-gray-800 mb-4")= product.title
+          h2(class="text-2xl font-semibold text-purple-600 mb-2") $#{product.price.toFixed(2)}
+          p(class="text-gray-600 text-base leading-relaxed mb-6")= product.description
+
+          a(
+            href="#"
+            class="inline-flex items-center justify-center px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white text-sm md:text-base font-medium rounded-md shadow transition duration-300"
+            aria-label=`Add ${product.title} to cart`
+          )
+            svg(class="h-5 w-5 mr-2", xmlns="http://www.w3.org/2000/svg", fill="none", viewBox="0 0 24 24", stroke="currentColor")
+              path(
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 2.3a1 1 0 00.7 1.7H17a2 2 0 100 4 2 2 0 000-4m-8 2a2 2 0 11-4 0 2 2 0 014 0"
+              )
+            | Add to Cart

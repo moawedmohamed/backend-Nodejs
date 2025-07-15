@@ -10,10 +10,13 @@ export interface Product {
     id: number,
     title: string,
     price: number,
-    description:string
+    description: string
+    imageUrl: string
 }
-export interface ProductBody{
+export interface ProductBody {
     title: string,
     price: number,
-    description:string
+    description: string,
+    imageUrl: string
+
 }
