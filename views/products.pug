@@ -13,7 +13,7 @@ body
         each product in products
                 .item-container
                     a(href=`/products/${product.id}`) 
-                        h2.item-heading= product.title 
+                        h2.item-heading.bg-purple-500= product.title 
                     p.item-description= product.description
                     p.item-price
                         sup= product.price
