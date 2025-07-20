@@ -4,7 +4,14 @@ import { Product } from "../types/product"
 
 class ProductController {
     // ** properties
-    constructor(private productService: ProductsService) { }
+    constructor(private productService: ProductsService) {
+        this.getProduct = this.getProduct.bind(this);
+        this.getProductByID = this.getProductByID.bind(this);
+        this.createProduct = this.createProduct.bind(this);
+        this.updateProduct = this.updateProduct.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
+    }
+
     getProduct(req: Request, res: Response) {
         const filterQuery = req.query.filter as string;
         if (filterQuery) {
