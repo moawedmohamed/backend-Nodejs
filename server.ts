@@ -5,13 +5,13 @@ import { Product } from "./types/product";
 import ProductController from "./controllers/productController";
 import ProductsService from "./services/productsService";
 import path from "path";
+import ProductsViewController from "./controllers/productsViewController";
 const app = express();
 console.log('hello');
 
 // ** set views and engine 
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
-
 // * static fils 
 app.use(express.static(path.join(__dirname, "public")))
 
@@ -25,13 +25,14 @@ app.use(express.json());
 const fakeProducts = generateFakeData();
 
 const productsService = new ProductsService(fakeProducts);
-const productController = new ProductController(productsService)
+const productController = new ProductController(productsService);
+const productsViewController = new ProductsViewController(productsService)
 console.log(productController)
 app.get('/', (req, res) => {
     res.render('index')
 })
-app.get('/products', (req, res) => productController.renderProductList(req, res))
-app.get('/products/:id', (req, res) => productController.renderProductPage(req, res))
+app.get('/products', productsViewController.renderProductList)
+app.get('/products/:id',productsViewController.renderProductPage)
 app.get("/api/products", (req, res) => productController.getProduct(req, res));
 
 app.get("/api/products/:id", (req, res) => productController.getProductByID(req, res));

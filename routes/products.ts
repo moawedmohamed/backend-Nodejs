@@ -7,7 +7,7 @@ const productsRouter = Router()
 const fakeProducts = generateFakeData();
 
 const productsService = new ProductsService(fakeProducts);
-const { getProduct, createProduct, getProductByID, deleteProduct, updateProduct, renderProductList, renderProductPage } = new ProductController(productsService)
+const { getProduct, createProduct, getProductByID, deleteProduct, updateProduct } = new ProductController(productsService)
 productsRouter.route('/').get(getProduct).post(createProduct)
 productsRouter.route('/:id')
     .get(getProductByID)

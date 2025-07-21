@@ -1,7 +1,6 @@
 import { Request, Response } from "express"
 import ProductsService from "../services/productsService"
 import { Product } from "../types/product"
-
 class ProductController {
     // ** properties
     constructor(private productService: ProductsService) {
@@ -82,17 +81,6 @@ class ProductController {
 
         }
     }
-    renderProductList(req: Request, res: Response) {
-        res.render('products', {
-            pageTitle: "View Products",
-            products: this.productService.findAll(),
-        })
-    }
-    renderProductPage(req: Request, res: Response) {
-        const productId = +req.params.id
-        res.render('product', {
-            product: this.productService.getProductByID(productId)
-        })
-    }
+  
 }
 export default ProductController
