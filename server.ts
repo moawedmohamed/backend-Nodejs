@@ -1,7 +1,6 @@
-import type { Request, Response } from "express";
 import express from "express";
+import helmet from "helmet";
 import { generateFakeData } from "./utils/fakeData";
-import { Product } from "./types/product";
 import ProductController from "./controllers/productController";
 import ProductsService from "./services/productsService";
 import path from "path";
@@ -18,7 +17,11 @@ app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
 // * static fils 
 app.use(express.static(path.join(__dirname, "public")))
-
+app.use(helmet({
+    // !Don't write this line in production
+    contentSecurityPolicy: false,
+    xFrameOptions: { action: "deny" }
+}))
 // ** if you want to make the custom header use this method
 // app.use(express.json({
 //     // type:"custom/header"
