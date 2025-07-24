@@ -8,6 +8,7 @@ import path from "path";
 import dotenv from 'dotenv'
 import ProductsViewController from "./controllers/productsViewController";
 import ErrorMiddleware from "./middlewares/Error";
+import NotFoundMiddleware from "./middlewares/notFound";
 const app = express();
 
 // set the dotenv config for the .env file
@@ -47,15 +48,17 @@ app.patch("/api/products/:id", (req, res) => productController.updateProduct(req
 
 // ** Delete Method
 app.delete('/api/products/:id', (req, res) => productController.deleteProduct(req, res))
-try {
+// try {
 
-    app.use((req, res) => {
-        res.status(404).render('notFound');
-    });
-} catch (error) {
-    console.log('the error is ' + error);
+//     app.use((req, res) => {
+//         res.status(404).render('notFound');
+//     });
+// } catch (error) {
+//     console.log('the error is ' + error);
 
-}
+// }
+// Middlewares 
+app.use(NotFoundMiddleware.handle)
 app.use(ErrorMiddleware.handle)
 const PORT: number = 5000;
 app.listen(PORT, () => {

@@ -9,7 +9,6 @@ export default class ProductsViewController {
         this.renderProductPage = this.renderProductPage.bind(this)
     }
     renderProductList(req: Request, res: Response) {
-        throw new Error('something went wrong  ')
         res.render('products', {
             pageTitle: "View Products",
             products: this.productService.findAll(),

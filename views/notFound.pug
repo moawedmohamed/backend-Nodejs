@@ -1,8 +1,19 @@
 //- views/notFound.pug
 doctype html
-html
+html(lang="en")
   head
-    title Not Found
-  body
-    h1 404 - Page Not Found
-    p The page you are looking for does not exist.
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title 404 - Page Not Found
+    link(rel="stylesheet", href="/styles/global.css") 
+    style.
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+  body.bg-gradient-to-br.from-gray-800.via-gray-900.to-black.text-white.flex.items-center.justify-center.min-h-screen
+    .text-center.p-6
+      h1.text-7xl.font-extrabold.mb-4.text-red-500 404
+      h2.text-3xl.font-bold.mb-2 Page Not Found
+      p.text-lg.text-gray-300.mb-6 Sorry, the page you're looking for doesn't exist.
+      a.bg-blue-600.hover.bg-blue-700.text-white.font-semibold.py-2.px-6.rounded-md.shadow-lg.transition(duration-300).inline-block(href="/") ← Go to Home

@@ -14,7 +14,6 @@ export default class ErrorMiddleware {
             pageTitle: "Error",
             message: "something went wrong ,please try later. ",
             error: err.message
-        })
-        next()
+        })  
     }
 }
