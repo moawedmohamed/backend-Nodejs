@@ -12,6 +12,7 @@ class ProductController {
     }
 
     getProduct(req: Request, res: Response) {
+        throw new Error("something went wrong  ");
         const filterQuery = req.query.filter as string;
         if (filterQuery) {
             res.send(this.productService.filterFelids(filterQuery))
@@ -81,6 +82,6 @@ class ProductController {
 
         }
     }
-  
+
 }
 export default ProductController
