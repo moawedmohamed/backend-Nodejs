@@ -6,6 +6,7 @@ import ProductController from "./controllers/productController";
 import ProductsService from "./services/productsService";
 import path from "path";
 import ProductsViewController from "./controllers/productsViewController";
+import ErrorMiddleware from "./middlewares/Error";
 const app = express();
 console.log('hello');
 
@@ -53,6 +54,7 @@ try {
     console.log('the error is ' + error);
 
 }
+app.use(ErrorMiddleware.handle)
 const PORT: number = 5000;
 app.listen(PORT, () => {
     console.log(` the server running on http://localhost:${PORT}`);
