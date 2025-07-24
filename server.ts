@@ -5,11 +5,13 @@ import { Product } from "./types/product";
 import ProductController from "./controllers/productController";
 import ProductsService from "./services/productsService";
 import path from "path";
+import dotenv from 'dotenv'
 import ProductsViewController from "./controllers/productsViewController";
 import ErrorMiddleware from "./middlewares/Error";
 const app = express();
-console.log('hello');
 
+// set the dotenv config for the .env file
+dotenv.config()
 // ** set views and engine 
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
@@ -33,7 +35,7 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 app.get('/products', productsViewController.renderProductList)
-app.get('/products/:id',productsViewController.renderProductPage)
+app.get('/products/:id', productsViewController.renderProductPage)
 app.get("/api/products", (req, res) => productController.getProduct(req, res));
 
 app.get("/api/products/:id", (req, res) => productController.getProductByID(req, res));

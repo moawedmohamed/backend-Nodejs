@@ -6,7 +6,7 @@ export default class ErrorMiddleware {
             res.status(500).json({
                 error: "Internal Server Error",
                 message: err.message,
-                stack: err.stack
+                stack: process.env.NODE_ENV === 'development' ? err.stack : null
             })
         }
         next()
