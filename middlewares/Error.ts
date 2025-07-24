@@ -8,7 +8,13 @@ export default class ErrorMiddleware {
                 message: err.message,
                 stack: process.env.NODE_ENV === 'development' ? err.stack : null
             })
+            return;
         }
+        res.status(500).render("error", {
+            pageTitle: "Error",
+            message: "something went wrong ,please try later. ",
+            error: err.message
+        })
         next()
     }
 }

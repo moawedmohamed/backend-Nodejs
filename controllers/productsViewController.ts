@@ -6,9 +6,10 @@ import { Request, Response } from "express"
 export default class ProductsViewController {
     constructor(private productService: ProductsService) {
         this.renderProductList = this.renderProductList.bind(this)
-        this.renderProductPage= this.renderProductPage.bind(this)
+        this.renderProductPage = this.renderProductPage.bind(this)
     }
     renderProductList(req: Request, res: Response) {
+        throw new Error('something went wrong  ')
         res.render('products', {
             pageTitle: "View Products",
             products: this.productService.findAll(),
