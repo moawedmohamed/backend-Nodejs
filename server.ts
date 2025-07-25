@@ -4,7 +4,10 @@ import { generateFakeData } from "./utils/fakeData";
 import ProductController from "./controllers/productController";
 import ProductsService from "./services/productsService";
 import path from "path";
+import morgan from 'morgan';
 import dotenv from 'dotenv'
+import compression from 'compression'
+import rateLimit from "express-rate-limit";
 import ProductsViewController from "./controllers/productsViewController";
 import ErrorMiddleware from "./middlewares/Error";
 import NotFoundMiddleware from "./middlewares/notFound";
@@ -12,10 +15,18 @@ const app = express();
 
 // set the dotenv config for the .env file
 dotenv.config()
+const rateLimiterOptions = {
+    windowMs: 15 * 60 * 1000,
+    limit: 2,
+    message: "Too many requests for this IP, please try again later",
+    standardHeaders: "draft-7" as "draft-7",
+    legacyHeaders: false,
+}
 // ** set views and engine 
 app.set('view engine', 'pug')
 app.set('views', path.join(__dirname, 'views'))
-// * static fils 
+// * middlewares  
+app.use(compression())
 app.use(express.static(path.join(__dirname, "public")))
 app.use(helmet({
     // !Don't write this line in production
@@ -26,7 +37,8 @@ app.use(helmet({
 // app.use(express.json({
 //     // type:"custom/header"
 // }));
-
+app.use(morgan('dev'))
+app.use(rateLimit(rateLimiterOptions))
 app.use(express.json());
 // ** Endpoint (products)
 const fakeProducts = generateFakeData();

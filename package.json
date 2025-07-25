@@ -9,7 +9,9 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",
+    "@types/compression": "^1.8.1",
     "@types/express": "^5.0.3",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^24.0.1",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.2.0",
@@ -21,10 +23,13 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "compression": "^1.8.1",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.0.1",
     "flowbite": "^3.1.2",
     "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
     "pug": "^3.0.3"
   }
 }
