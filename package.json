@@ -13,6 +13,7 @@
     "@types/express": "^5.0.3",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.0.1",
+    "@types/pg": "^8.15.5",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.2.0",
     "nodemon": "^3.1.10",
@@ -30,6 +31,7 @@
     "flowbite": "^3.1.2",
     "helmet": "^8.1.0",
     "morgan": "^1.10.1",
+    "pg": "^8.16.3",
     "pug": "^3.0.3"
   }
 }

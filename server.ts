@@ -11,6 +11,7 @@ import rateLimit from "express-rate-limit";
 import ProductsViewController from "./controllers/productsViewController";
 import ErrorMiddleware from "./middlewares/Error";
 import NotFoundMiddleware from "./middlewares/notFound";
+import pool from "./models/db";
 const app = express();
 
 // set the dotenv config for the .env file
@@ -53,6 +54,7 @@ app.get('/', (req, res) => {
 app.get('/products', productsViewController.renderProductList)
 app.get('/products/:id', productsViewController.renderProductPage)
 app.get("/api/products", (req, res) => productController.getProduct(req, res));
+
 
 app.get("/api/products/:id", (req, res) => productController.getProductByID(req, res));
 // ** Post Method
