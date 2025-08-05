@@ -1,4 +1,9 @@
+
+import dotenv from 'dotenv'
 import pg, { Pool } from 'pg'
+
+dotenv.config()
+
 const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT ? parseInt(process.env.DB_PORT) : undefined,

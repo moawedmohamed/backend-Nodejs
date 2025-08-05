@@ -55,7 +55,19 @@ app.get('/products', productsViewController.renderProductList)
 app.get('/products/:id', productsViewController.renderProductPage)
 app.get("/api/products", (req, res) => productController.getProduct(req, res));
 
+// **connect to the database
+app.get("/db/products", async (req, res) => {
+    try {
+        const products = await pool.query('select id,name,price ,qty from products ');
+        res.json({
+            products: products.rows,
+            length: products.rowCount
+        })
+    } catch (error) {
+        console.log(error);
 
+    }
+})
 app.get("/api/products/:id", (req, res) => productController.getProductByID(req, res));
 // ** Post Method
 app.post("/api/products", (req, res) => productController.createProduct(req, res));
